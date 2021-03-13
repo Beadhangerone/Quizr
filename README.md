@@ -2,6 +2,7 @@
 
 Quizr is an application for online testing and quizzing. Using Quizr you can create, answer and analyze the results of user-generated quizzes and tests.
 The motivation behind the project is the fast digitalization of the learning process.
+
 Requirements:
 	Must have:
 - [ ] Creation of the quiz;
