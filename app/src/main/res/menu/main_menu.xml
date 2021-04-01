@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    android:icon="@drawable/ic_favorite"-->
+    <item
+        android:id="@+id/all_quizzes"
+        android:title="@string/all_quizzes_str"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/new_quiz"
+        android:title="@string/new_quiz_str"
+        app:showAsAction="never" />
+
+</menu>
