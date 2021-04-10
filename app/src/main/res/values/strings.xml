@@ -3,11 +3,14 @@
     <string name="all_quizzes_str">All Quizzes</string>
     <string name="new_quiz_str">New Quiz</string>
     <string name="main_menu_title_str">Quizr</string>
-    <string name="nav_home_str">Home</string>
-    <string name="nav_create_quiz_str">Create Quiz</string>
+    <string name="home_str">Home</string>
+    <string name="create_quiz_str">Create Quiz</string>
     <string name="Avatar">Avatar</string>
     <string name="nav_header_title">Quizr</string>
     <string name="nav_header_subtitle">Menu</string>
     <string name="nav_open">Navigation bar open</string>
     <string name="nav_close">Navigation bar closed</string>
+    <string name="login_str">Log in</string>
+    <string name="register_str">Registration</string>
+    <string name="main_page_str">Main Page</string>
 </resources>

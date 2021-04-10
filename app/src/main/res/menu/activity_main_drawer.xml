@@ -2,13 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_home_page"
             android:icon="@drawable/nav_home_ico"
-            android:title="@string/nav_home_str" />
+            android:title="@string/home_str" />
         <item
-            android:id="@+id/nav_create_quiz"
-            android:icon="@drawable/nav_create_quiz_ico"
-            android:title="@string/nav_create_quiz_str" />
+            android:id="@+id/nav_login"
+            android:icon="@drawable/login_ico"
+            android:title="@string/login_str" />
+
+        <item
+            android:id="@+id/nav_register"
+            android:icon="@drawable/register_ico"
+            android:title="@string/register_str" />
     </group>
 
 <!--    <item android:title="Communicate">-->

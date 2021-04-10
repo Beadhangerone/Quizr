@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/nav_home_page"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation">
+
+    <fragment
+        android:id="@+id/nav_home_page"
+        android:name="com.myapp1.quizr.MainPageFragment"
+        android:label="@string/main_page_str"
+        tools:layout="@layout/main_page_fragment" />
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.myapp1.quizr.LogInFragment"
+        android:label="@string/login_str"
+        tools:layout="@layout/log_in_fragment" />
+
+    <fragment
+        android:id="@+id/nav_register"
+        android:name="com.myapp1.quizr.RegisterFragment"
+        android:label="@string/register_str"
+        tools:layout="@layout/register_fragment" />
+
+    <fragment
+        android:id="@+id/nav_new_quiz"
+        android:name="com.myapp1.quizr.NewQuizFragment"
+        android:label="@string/new_quiz_str"
+        tools:layout="@layout/new_quiz_fragment" />
+
+    <fragment
+        android:id="@+id/nav_all_quizzes"
+        android:name="com.myapp1.quizr.AllQuizzesFragment"
+        android:label="@string/all_quizzes_str"
+        tools:layout="@layout/all_quizzes_fragment" />
+
+</navigation>
