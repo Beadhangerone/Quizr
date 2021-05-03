@@ -13,4 +13,10 @@
     <string name="login_str">Log in</string>
     <string name="register_str">Registration</string>
     <string name="main_page_str">Main Page</string>
+    <string name="quiz_title_str">Quiz Title</string>
+    <string name="submit_str">Submit</string>
+    <string name="quizzes_in_development_str">Quizzes in Development</string>
+    <string name="quiz_description_str">Quiz Description</string>
+    <string name="total_quizzes_str">Total Quizzes</string>
+    <string name="colon_punctualtion_str">:</string>
 </resources>

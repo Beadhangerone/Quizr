@@ -11,6 +11,11 @@
             android:title="@string/login_str" />
 
         <item
+            android:id="@+id/nav_my_quizzes_in_dev"
+            android:icon="@drawable/in_dev_ico"
+            android:title="@string/quizzes_in_development_str" />
+
+        <item
             android:id="@+id/nav_register"
             android:icon="@drawable/register_ico"
             android:title="@string/register_str" />

@@ -35,4 +35,11 @@
         android:label="@string/all_quizzes_str"
         tools:layout="@layout/all_quizzes_fragment" />
 
+    <fragment
+        android:id="@+id/nav_my_quizzes_in_dev"
+        android:name="com.myapp1.quizr.MyQuizzesInDevFragment"
+        android:label="@string/quizzes_in_development_str"
+        tools:layout="@layout/my_quizzes_in_dev_fragment"
+        />
+
 </navigation>
