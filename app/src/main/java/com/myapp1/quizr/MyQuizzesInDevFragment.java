@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +25,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyQuizzesInDevFragment extends Fragment {
+public class MyQuizzesInDevFragment extends Fragment implements QuizRVAdapter.OnEditQuizClickListener {
     private QuizVM quizVM;
     private RecyclerView myQuizzesInDevList;
     private QuizRVAdapter quizRVAdapter;
@@ -45,12 +47,18 @@ public class MyQuizzesInDevFragment extends Fragment {
         quizVM.getMyQuizzesInDev().observe(getViewLifecycleOwner(), new Observer<List<Quiz>>() {
             @Override
             public void onChanged(List<Quiz> quizzes) {
-                quizRVAdapter = new QuizRVAdapter(quizzes);
+                quizRVAdapter = new QuizRVAdapter(quizzes, MyQuizzesInDevFragment.this);
                 myQuizzesInDevList.setAdapter(quizRVAdapter);
                 String count = quizzes.size()+"";
                 quiz_count.setText(count);
             }
         });
         return view;
+    }
+
+    @Override
+    public void onEditQuizClick(View view, Quiz quiz) {
+        NavDirections action = MyQuizzesInDevFragmentDirections.EditQuizAction(quiz);
+        Navigation.findNavController(view).navigate( action );
     }
 }

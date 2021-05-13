@@ -19,4 +19,10 @@
     <string name="quiz_description_str">Quiz Description</string>
     <string name="total_quizzes_str">Total Quizzes</string>
     <string name="colon_punctualtion_str">:</string>
+    <string name="edit_str">Edit</string>
+    <string name="delete_str">Delete</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_quiz_str">Edit Quiz</string>
+    <string name="questions_str">Questions</string>
 </resources>

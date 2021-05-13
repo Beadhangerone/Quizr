@@ -3,8 +3,10 @@ package com.myapp1.quizr.Model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "quizzes_in_dev")
-public class Quiz {
+public class Quiz implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String title;

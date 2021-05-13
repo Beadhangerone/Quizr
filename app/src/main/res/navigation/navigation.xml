@@ -40,6 +40,19 @@
         android:name="com.myapp1.quizr.MyQuizzesInDevFragment"
         android:label="@string/quizzes_in_development_str"
         tools:layout="@layout/my_quizzes_in_dev_fragment"
-        />
+        >
+        <action
+            android:id="@+id/EditQuizAction"
+            app:destination="@id/editQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editQuizFragment"
+        android:name="com.myapp1.quizr.EditQuizFragment"
+        android:label="@string/edit_quiz_str"
+        tools:layout="@layout/edit_quiz_fragment" >
+        <argument
+            android:name="quizToEdit"
+            app:argType="com.myapp1.quizr.Model.Quiz" />
+    </fragment>
 
 </navigation>
