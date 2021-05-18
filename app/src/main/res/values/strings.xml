@@ -25,4 +25,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="edit_quiz_str">Edit Quiz</string>
     <string name="questions_str">Questions</string>
+    <string name="question_text_str">Question Text</string>
+    <string name="add_str">Add</string>
+    <string name="answers_str">Answers</string>
 </resources>

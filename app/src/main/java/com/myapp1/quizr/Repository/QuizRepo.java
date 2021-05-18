@@ -11,10 +11,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.myapp1.quizr.DAO.QuizDAO;
-import com.myapp1.quizr.DB.QuizDB;
+import com.myapp1.quizr.DB.QuizrDB;
 import com.myapp1.quizr.Model.Quiz;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,7 +26,7 @@ public class QuizRepo {
     private Handler mainThreadHandler;
 
     public QuizRepo(Application application) {
-        QuizDB database = QuizDB.getInstance(application);
+        QuizrDB database = QuizrDB.getInstance(application);
         quizDAO = database.quizDAO();
 
         myQuizzesInDev = new LiveData<List<Quiz>>() {

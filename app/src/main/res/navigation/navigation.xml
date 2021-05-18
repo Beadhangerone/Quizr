@@ -53,6 +53,18 @@
         <argument
             android:name="quizToEdit"
             app:argType="com.myapp1.quizr.Model.Quiz" />
+        <action
+            android:id="@+id/NewQuestionAction"
+            app:destination="@id/newQuestionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newQuestionFragment"
+        android:name="com.myapp1.quizr.newQuestionFragment"
+        android:label="new_question_fragment"
+        tools:layout="@layout/new_question_fragment" >
+        <argument
+            android:name="currentQuiz"
+            app:argType="com.myapp1.quizr.Model.Quiz" />
     </fragment>
 
 </navigation>

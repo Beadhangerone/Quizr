@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
@@ -20,9 +19,6 @@ import com.myapp1.quizr.Adapters.QuizRVAdapter;
 import com.myapp1.quizr.Model.Quiz;
 import com.myapp1.quizr.VM.QuizVM;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyQuizzesInDevFragment extends Fragment implements QuizRVAdapter.OnEditQuizClickListener {
