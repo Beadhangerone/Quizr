@@ -7,15 +7,11 @@ import androidx.room.Insert;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "questions",
-        indices = {@Index("quiz_id"), @Index("question_type_id")},
+        indices = {@Index("quiz_id")},
         foreignKeys = {
             @ForeignKey(entity = Quiz.class,
             parentColumns = "id",
             childColumns = "quiz_id",
-            onDelete = ForeignKey.CASCADE),
-            @ForeignKey(entity = QuestionType.class,
-            parentColumns = "id",
-            childColumns = "question_type_id",
             onDelete = ForeignKey.CASCADE)
         }
 )
@@ -26,7 +22,6 @@ public class Question {
 
     // FK
     private int quiz_id;
-    private int question_type_id;
 
     private String question_text;
 
@@ -36,10 +31,6 @@ public class Question {
 
     public void setQuiz_id(int quiz_id) {
         this.quiz_id = quiz_id;
-    }
-
-    public void setQuestion_type_id(int question_type_id) {
-        this.question_type_id = question_type_id;
     }
 
     public void setQuestion_text(String question_text) {
@@ -52,10 +43,6 @@ public class Question {
 
     public int getQuiz_id() {
         return quiz_id;
-    }
-
-    public int getQuestion_type_id() {
-        return question_type_id;
     }
 
     public String getQuestion_text() {

@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import com.myapp1.quizr.DAO.QuestionDAO;
 import com.myapp1.quizr.DB.QuizrDB;
 import com.myapp1.quizr.Model.Question;
+import com.myapp1.quizr.Model.QuestionOption;
 import com.myapp1.quizr.Model.Quiz;
 
 import java.util.List;
@@ -58,5 +59,14 @@ public class QuestionRepo {
 
     public void createQuestion(Question question) {
         executorService.execute(() -> questionDAO.insert(question));
+    }
+
+    public LiveData<List<QuestionOption>> getOptionsForQuestion(Question question) {
+        return new LiveData<List<QuestionOption>>() {
+            @Override
+            public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super List<QuestionOption>> observer) {
+                questionDAO.getOptionsForQuestion(question.getId());
+            }
+        };
     }
 }

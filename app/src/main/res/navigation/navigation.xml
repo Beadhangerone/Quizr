@@ -60,7 +60,7 @@
     <fragment
         android:id="@+id/newQuestionFragment"
         android:name="com.myapp1.quizr.newQuestionFragment"
-        android:label="new_question_fragment"
+        android:label="New Question"
         tools:layout="@layout/new_question_fragment" >
         <argument
             android:name="currentQuiz"

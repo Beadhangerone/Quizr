@@ -23,7 +23,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.myapp1.quizr.Adapters.EditQuestionRVAdapter;
 import com.myapp1.quizr.Model.Question;
 import com.myapp1.quizr.Model.Quiz;
+import com.myapp1.quizr.VM.QuestionVM;
 import com.myapp1.quizr.VM.QuizEditorVM;
+import com.myapp1.quizr.VM.QuizVM;
 
 import java.util.List;
 
@@ -37,6 +39,8 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
     // the fragment initialization parameters
     private static final String QUIZ_TO_EDIT = "quizToEdit";
     private Quiz quiz;
+    private QuizEditorVM quizEditorVM;
+    private TextView questionCount;
     public RecyclerView questionsList;
     private EditQuestionRVAdapter editQuestionRVAdapter;
     private Button addQuestionBtn;
@@ -66,6 +70,20 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.edit_quiz_fragment, container, false);
 
+        questionCount = view.findViewById(R.id.questionCount);
+
+        quizEditorVM = new ViewModelProvider(this).get(QuizEditorVM.class);
+        quizEditorVM.getQuestionsForQuiz(quiz).observe(getViewLifecycleOwner(), new Observer<List<Question>>() {
+            @Override
+            public void onChanged(List<Question> questions) {
+                editQuestionRVAdapter = new EditQuestionRVAdapter(questions, EditQuizFragment.this);
+                questionsList.setAdapter(editQuestionRVAdapter);
+                questionCount.setText(editQuestionRVAdapter.getItemCount());
+            }
+        });
+
+        questionsList = view.findViewById(R.id.questionListRV);
+
         TextInputEditText title = view.findViewById(R.id.quizTitleInput);
         title.setText(quiz.getTitle());
 
@@ -86,12 +104,8 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        //super.onViewCreated(view, savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
 
-        Fragment questionsListFragment = new QuestionsListFragment(quiz);
-
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.questions_list_container, questionsListFragment).commit();
 
     }
 

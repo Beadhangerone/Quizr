@@ -18,10 +18,6 @@ public class EditQuestionRVAdapter extends RecyclerView.Adapter<EditQuestionRVAd
     private List<Question> questions;
     final private OnEditQuestionClickListener onEditQuestionClickListener;
 
-    public interface OnEditQuestionClickListener{
-        void onEditClick(View view, Question question);
-    }
-
     public EditQuestionRVAdapter(List<Question> questions, OnEditQuestionClickListener onEditQuestionClickListener) {
         this.questions = questions;
         this.onEditQuestionClickListener = onEditQuestionClickListener;
@@ -49,6 +45,10 @@ public class EditQuestionRVAdapter extends RecyclerView.Adapter<EditQuestionRVAd
     @Override
     public int getItemCount() {
         return questions.size();
+    }
+
+    public interface OnEditQuestionClickListener{
+        void onEditClick(View view, Question question);
     }
 
     class EditQuestionViewHolder extends RecyclerView.ViewHolder{

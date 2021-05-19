@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.myapp1.quizr.Model.Question;
+import com.myapp1.quizr.Model.QuestionOption;
 import com.myapp1.quizr.Model.Quiz;
 
 import java.util.List;
@@ -22,4 +23,7 @@ public interface QuestionDAO {
 
     @Query("SELECT * FROM questions where quiz_id = :quiz_id;")
     LiveData<List<Question>> getQuestionsForQuiz(int quiz_id);
+
+    @Query("SELECT * FROM question_options where question_id = :question_id;")
+    LiveData<List<QuestionOption>> getOptionsForQuestion(int question_id);
 }
