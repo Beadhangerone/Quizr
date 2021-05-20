@@ -65,4 +65,8 @@ public class QuestionRepo {
     public void insertOptions(List<QuestionOption> options) {
         optionDAO.insertAllOptions(options);
     }
+
+    public void removeQuestion(Question question) {
+        questionDAO.delete(question);
+    }
 }

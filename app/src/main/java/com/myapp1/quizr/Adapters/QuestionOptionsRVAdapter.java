@@ -3,7 +3,6 @@ package com.myapp1.quizr.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.myapp1.quizr.Model.QuestionOption;
 import com.myapp1.quizr.R;
 
@@ -32,7 +30,7 @@ public class QuestionOptionsRVAdapter extends RecyclerView.Adapter<QuestionOptio
     @Override
     public QuestionOptionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.question_option_fragment, parent, false);
+        View view = inflater.inflate(R.layout.edit_question_option_fragment, parent, false);
         return new QuestionOptionViewHolder(view);
     }
 

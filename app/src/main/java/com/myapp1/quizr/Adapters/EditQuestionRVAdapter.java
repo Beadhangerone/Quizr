@@ -16,18 +16,18 @@ import java.util.List;
 
 public class EditQuestionRVAdapter extends RecyclerView.Adapter<EditQuestionRVAdapter.EditQuestionViewHolder> {
     private List<Question> questions;
-    final private OnEditQuestionClickListener onEditQuestionClickListener;
+    final private QuestionClickListener questionClickListener;
 
-    public EditQuestionRVAdapter(List<Question> questions, OnEditQuestionClickListener onEditQuestionClickListener) {
+    public EditQuestionRVAdapter(List<Question> questions, QuestionClickListener questionClickListener) {
         this.questions = questions;
-        this.onEditQuestionClickListener = onEditQuestionClickListener;
+        this.questionClickListener = questionClickListener;
     }
 
     @NonNull
     @Override
     public EditQuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.question_fragment, parent, false);
+        View view = inflater.inflate(R.layout.edit_question_fragment, parent, false);
         return new EditQuestionViewHolder(view);
     }
 
@@ -47,20 +47,30 @@ public class EditQuestionRVAdapter extends RecyclerView.Adapter<EditQuestionRVAd
         return questions.size();
     }
 
-    public interface OnEditQuestionClickListener{
+    public interface QuestionClickListener {
         void onEditClick(View view, Question question);
+        void onDeleteClick(View view, Question question);
     }
 
     class EditQuestionViewHolder extends RecyclerView.ViewHolder{
 
             TextView question_text;
             Button edit_btn;
+            Button delete_btn;
             Question current_question;
 
         public EditQuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             question_text = itemView.findViewById(R.id.question_text);
             edit_btn = itemView.findViewById(R.id.edit_question_btn);
+            delete_btn = itemView.findViewById(R.id.delete_question_btn);
+
+            delete_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                        questionClickListener.onDeleteClick(v, current_question);
+                }
+            });
 
             edit_btn.setOnClickListener(new View.OnClickListener() {
                 @Override

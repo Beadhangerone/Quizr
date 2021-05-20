@@ -1,11 +1,12 @@
 package com.myapp1.quizr;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.myapp1.quizr.Adapters.EditQuestionRVAdapter;
@@ -24,7 +26,6 @@ import com.myapp1.quizr.Model.Question;
 import com.myapp1.quizr.Model.Quiz;
 import com.myapp1.quizr.VM.QuizEditorVM;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ import java.util.List;
  * Use the {@link EditQuizFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.OnEditQuestionClickListener {
+public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.QuestionClickListener {
 
     // the fragment initialization parameters
     private static final String QUIZ_TO_EDIT = "quizToEdit";
@@ -110,6 +111,25 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
 
     @Override
     public void onEditClick(View view, Question question) {
-        // TODO
+
+    }
+
+    @Override
+    public void onDeleteClick(View view, Question question) {
+
+        new AlertDialog.Builder(this.getContext())
+                .setTitle("Delete Question")
+                .setMessage("Do you really want to delete this question?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        quizEditorVM.removeQuestion(question);
+                        questions.remove(question);
+                        editQuestionRVAdapter = new EditQuestionRVAdapter(questions, EditQuizFragment.this);
+                        questionsList.setAdapter(editQuestionRVAdapter);
+                        questionCount.setText(questions.size()+"");
+                        Toast.makeText(EditQuizFragment.this.getContext(), "Question Deleted", Toast.LENGTH_SHORT).show();
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
     }
 }

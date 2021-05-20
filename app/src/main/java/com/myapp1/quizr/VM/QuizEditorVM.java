@@ -30,4 +30,7 @@ public class QuizEditorVM extends AndroidViewModel {
         return questionRepo.getQuestionsForQuiz(quiz);
     }
 
+    public void removeQuestion(Question question) {
+        questionRepo.removeQuestion(question);
+    }
 }
