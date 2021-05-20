@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/nav_home_page"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation">
+
+    <fragment
+        android:id="@+id/nav_home_page"
+        android:name="com.myapp1.quizr.MainPageFragment"
+        android:label="@string/main_page_str"
+        tools:layout="@layout/main_page_fragment" />
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.myapp1.quizr.LogInFragment"
+        android:label="@string/login_str"
+        tools:layout="@layout/log_in_fragment" />
+
+    <fragment
+        android:id="@+id/nav_log_out"
+        android:name="com.myapp1.quizr.LogOutFragment"
+        android:label="@string/log_out_str"
+        tools:layout="@layout/log_out_fragment" />
+
+    <fragment
+        android:id="@+id/nav_new_quiz"
+        android:name="com.myapp1.quizr.NewQuizFragment"
+        android:label="@string/new_quiz_str"
+        tools:layout="@layout/new_quiz_fragment" />
+
+    <fragment
+        android:id="@+id/nav_all_quizzes"
+        android:name="com.myapp1.quizr.AllQuizzesFragment"
+        android:label="@string/all_quizzes_str"
+        tools:layout="@layout/all_quizzes_fragment" />
+
+    <fragment
+        android:id="@+id/nav_my_quizzes_in_dev"
+        android:name="com.myapp1.quizr.MyQuizzesInDevFragment"
+        android:label="@string/quizzes_in_development_str"
+        tools:layout="@layout/my_quizzes_in_dev_fragment"
+        >
+        <action
+            android:id="@+id/EditQuizAction"
+            app:destination="@id/editQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editQuizFragment"
+        android:name="com.myapp1.quizr.EditQuizFragment"
+        android:label="@string/edit_quiz_str"
+        tools:layout="@layout/edit_quiz_fragment" >
+        <argument
+            android:name="quizToEdit"
+            app:argType="com.myapp1.quizr.Model.Quiz" />
+        <action
+            android:id="@+id/OpenQuestionEditor"
+            app:destination="@id/newQuestionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newQuestionFragment"
+        android:name="com.myapp1.quizr.QuestionEditorFragment"
+        android:label="New Question"
+        tools:layout="@layout/question_editor_fragment" >
+        <argument
+            android:name="currentQuiz"
+            app:argType="com.myapp1.quizr.Model.Quiz" />
+        <action
+            android:id="@+id/action_newQuestionFragment_to_editQuizFragment"
+            app:destination="@id/editQuizFragment" />
+        <argument
+            android:name="questionToEdit"
+            app:argType="com.myapp1.quizr.Model.Question"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionItemFragment"
+        android:name="com.myapp1.quizr.QuestionItemFragment"
+        android:label="question_item_fragment"
+        tools:layout="@layout/question_item_fragment" />
+
+</navigation>
