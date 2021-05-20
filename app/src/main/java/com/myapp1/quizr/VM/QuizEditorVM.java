@@ -26,13 +26,8 @@ public class QuizEditorVM extends AndroidViewModel {
 
     }
 
-    public LiveData<List<Question>> getQuestionsForQuiz(Quiz quiz){
-        return new LiveData<List<Question>>() {
-            @Override
-            public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super List<Question>> observer) {
-                questionRepo.getQuestionsForQuiz(quiz).observe(owner, observer);
-            }
-        };
+    public List<Question> getQuestionsForQuiz(Quiz quiz){
+        return questionRepo.getQuestionsForQuiz(quiz);
     }
 
 }

@@ -22,7 +22,7 @@ public interface QuestionDAO {
     void delete(Question question);
 
     @Query("SELECT * FROM questions where quiz_id = :quiz_id;")
-    LiveData<List<Question>> getQuestionsForQuiz(int quiz_id);
+    List<Question> getQuestionsForQuiz(int quiz_id);
 
     @Query("SELECT * FROM question_options where question_id = :question_id;")
     LiveData<List<QuestionOption>> getOptionsForQuestion(int question_id);

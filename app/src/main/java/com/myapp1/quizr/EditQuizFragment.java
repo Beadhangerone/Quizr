@@ -37,6 +37,7 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
     // the fragment initialization parameters
     private static final String QUIZ_TO_EDIT = "quizToEdit";
     private Quiz quiz;
+    private List<Question> questions;
     private QuizEditorVM quizEditorVM;
     public RecyclerView questionsList;
     private EditQuestionRVAdapter editQuestionRVAdapter;
@@ -56,18 +57,11 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
         questionsList.hasFixedSize();
         questionsList.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        editQuestionRVAdapter = new EditQuestionRVAdapter(new ArrayList<>(), this);
+        questions = quizEditorVM.getQuestionsForQuiz(quiz);
+
+        editQuestionRVAdapter = new EditQuestionRVAdapter(questions, this);
         questionsList.setAdapter(editQuestionRVAdapter);
-
-
-        quizEditorVM.getQuestionsForQuiz(quiz).observe(getViewLifecycleOwner(), new Observer<List<Question>>() {
-            @Override
-            public void onChanged(List<Question> questions) {
-                editQuestionRVAdapter = new EditQuestionRVAdapter(questions, EditQuizFragment.this);
-                questionsList.setAdapter(editQuestionRVAdapter);
-                questionCount.setText(questions.size());
-            }
-        });
+        questionCount.setText(questions.size()+"");
 
         TextInputEditText title = view.findViewById(R.id.quizTitleInput);
         title.setText(quiz.getTitle());
