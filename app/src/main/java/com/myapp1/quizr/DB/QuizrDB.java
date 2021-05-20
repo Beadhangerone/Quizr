@@ -7,10 +7,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.myapp1.quizr.DAO.QuestionDAO;
+import com.myapp1.quizr.DAO.QuestionOptionDAO;
 import com.myapp1.quizr.DAO.QuizDAO;
 import com.myapp1.quizr.Model.Question;
 import com.myapp1.quizr.Model.QuestionOption;
-import com.myapp1.quizr.Model.QuestionType;
 import com.myapp1.quizr.Model.Quiz;
 
 @Database(entities = {Quiz.class, Question.class, QuestionOption.class}, version = 3)
@@ -21,11 +21,14 @@ public abstract class QuizrDB extends RoomDatabase {
 
     public abstract QuestionDAO questionDAO();
 
+    public abstract QuestionOptionDAO optionDAO();
+
     public static synchronized QuizrDB getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     QuizrDB.class, "quizr_db")
                     .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
                     .build();
         }
         return instance;

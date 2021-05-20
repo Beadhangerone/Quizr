@@ -15,7 +15,6 @@ import com.myapp1.quizr.R;
 import java.util.List;
 
 public class QuizRVAdapter extends RecyclerView.Adapter<QuizRVAdapter.QuizViewHolder>{
-
     private List<Quiz> quizzes;
     final private OnEditQuizClickListener onEditQuizClickListener;
 
@@ -55,7 +54,6 @@ public class QuizRVAdapter extends RecyclerView.Adapter<QuizRVAdapter.QuizViewHo
     public interface OnEditQuizClickListener {
         void onEditQuizClick(View view, Quiz quiz);
     }
-
 
     class QuizViewHolder extends RecyclerView.ViewHolder {
 

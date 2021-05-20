@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
@@ -23,10 +22,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.myapp1.quizr.Adapters.EditQuestionRVAdapter;
 import com.myapp1.quizr.Model.Question;
 import com.myapp1.quizr.Model.Quiz;
-import com.myapp1.quizr.VM.QuestionVM;
 import com.myapp1.quizr.VM.QuizEditorVM;
-import com.myapp1.quizr.VM.QuizVM;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,10 +38,54 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
     private static final String QUIZ_TO_EDIT = "quizToEdit";
     private Quiz quiz;
     private QuizEditorVM quizEditorVM;
-    private TextView questionCount;
     public RecyclerView questionsList;
     private EditQuestionRVAdapter editQuestionRVAdapter;
+    private TextView questionCount;
     private Button addQuestionBtn;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.edit_quiz_fragment, container, false);
+
+        questionCount = view.findViewById(R.id.questionCount);
+
+        quizEditorVM = new ViewModelProvider(this).get(QuizEditorVM.class);
+
+        questionsList = view.findViewById(R.id.questionListRV);
+        questionsList.hasFixedSize();
+        questionsList.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        editQuestionRVAdapter = new EditQuestionRVAdapter(new ArrayList<>(), this);
+        questionsList.setAdapter(editQuestionRVAdapter);
+
+
+        quizEditorVM.getQuestionsForQuiz(quiz).observe(getViewLifecycleOwner(), new Observer<List<Question>>() {
+            @Override
+            public void onChanged(List<Question> questions) {
+                editQuestionRVAdapter = new EditQuestionRVAdapter(questions, EditQuizFragment.this);
+                questionsList.setAdapter(editQuestionRVAdapter);
+                questionCount.setText(questions.size());
+            }
+        });
+
+        TextInputEditText title = view.findViewById(R.id.quizTitleInput);
+        title.setText(quiz.getTitle());
+
+        TextInputEditText description = view.findViewById(R.id.quizDescInput);
+        description.setText(quiz.getDescription());
+
+        addQuestionBtn = view.findViewById(R.id.newQuestionBtn);
+        addQuestionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = EditQuizFragmentDirections.NewQuestionAction(quiz);
+                Navigation.findNavController(view).navigate( action );
+            }
+        });
+
+        return view;
+    }
 
     public EditQuizFragment() {
         // Required empty public constructor
@@ -63,43 +105,6 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
         if (getArguments() != null) {
             quiz = (Quiz) getArguments().getSerializable(QUIZ_TO_EDIT);
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.edit_quiz_fragment, container, false);
-
-        questionCount = view.findViewById(R.id.questionCount);
-
-        quizEditorVM = new ViewModelProvider(this).get(QuizEditorVM.class);
-        quizEditorVM.getQuestionsForQuiz(quiz).observe(getViewLifecycleOwner(), new Observer<List<Question>>() {
-            @Override
-            public void onChanged(List<Question> questions) {
-                editQuestionRVAdapter = new EditQuestionRVAdapter(questions, EditQuizFragment.this);
-                questionsList.setAdapter(editQuestionRVAdapter);
-                questionCount.setText(editQuestionRVAdapter.getItemCount());
-            }
-        });
-
-        questionsList = view.findViewById(R.id.questionListRV);
-
-        TextInputEditText title = view.findViewById(R.id.quizTitleInput);
-        title.setText(quiz.getTitle());
-
-        TextInputEditText description = view.findViewById(R.id.quizDescInput);
-        description.setText(quiz.getDescription());
-
-        addQuestionBtn = view.findViewById(R.id.newQuestionBtn);
-        addQuestionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavDirections action = EditQuizFragmentDirections.NewQuestionAction(quiz);
-                Navigation.findNavController(view).navigate( action );
-            }
-        });
-
-        return view;
     }
 
     @Override

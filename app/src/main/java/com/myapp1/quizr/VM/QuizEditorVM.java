@@ -18,7 +18,6 @@ import java.util.List;
 public class QuizEditorVM extends AndroidViewModel {
 
     public QuestionRepo questionRepo;
-    private LiveData<List<Question>> questions;
 
     public QuizEditorVM(@NonNull Application application) {
         super(application);
@@ -28,15 +27,12 @@ public class QuizEditorVM extends AndroidViewModel {
     }
 
     public LiveData<List<Question>> getQuestionsForQuiz(Quiz quiz){
-        questions = new LiveData<List<Question>>() {
+        return new LiveData<List<Question>>() {
             @Override
             public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super List<Question>> observer) {
                 questionRepo.getQuestionsForQuiz(quiz).observe(owner, observer);
             }
         };
-
-        return questions;
     }
-
 
 }

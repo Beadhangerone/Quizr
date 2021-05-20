@@ -28,7 +28,7 @@ public class MyQuizzesInDevFragment extends Fragment implements QuizRVAdapter.On
     private TextView quiz_count;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        //super.onCreate(savedInstanceState);
 
         View view = inflater.inflate(R.layout.my_quizzes_in_dev_fragment, container, false);
 

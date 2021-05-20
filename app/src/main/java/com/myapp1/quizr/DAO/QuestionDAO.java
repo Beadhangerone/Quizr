@@ -16,7 +16,7 @@ import java.util.List;
 public interface QuestionDAO {
 
     @Insert
-    void insert(Question question);
+    long insert(Question question);
 
     @Delete
     void delete(Question question);

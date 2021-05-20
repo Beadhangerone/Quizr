@@ -35,4 +35,21 @@ public class QuestionVM extends AndroidViewModel {
 
         return options;
     }
+
+    public void insertOptionsForQuestion(Question question, List<QuestionOption> options) {
+        if(options.size() < 2){
+            throw new RuntimeException("Cannot create a question with less than 2 options");
+        }
+
+        int id = questionRepo.insertQuestion(question);
+
+        if (id <= 0){
+            throw new RuntimeException("Cannot insert options for question with id <= 0");
+        }
+
+        for (QuestionOption option: options) {
+            option.setQuestion_id(id);
+        }
+        questionRepo.insertOptions(options);
+    }
 }
