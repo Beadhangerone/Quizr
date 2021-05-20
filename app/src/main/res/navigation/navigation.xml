@@ -35,4 +35,39 @@
         android:label="@string/all_quizzes_str"
         tools:layout="@layout/all_quizzes_fragment" />
 
+    <fragment
+        android:id="@+id/nav_my_quizzes_in_dev"
+        android:name="com.myapp1.quizr.MyQuizzesInDevFragment"
+        android:label="@string/quizzes_in_development_str"
+        tools:layout="@layout/my_quizzes_in_dev_fragment"
+        >
+        <action
+            android:id="@+id/EditQuizAction"
+            app:destination="@id/editQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editQuizFragment"
+        android:name="com.myapp1.quizr.EditQuizFragment"
+        android:label="@string/edit_quiz_str"
+        tools:layout="@layout/edit_quiz_fragment" >
+        <argument
+            android:name="quizToEdit"
+            app:argType="com.myapp1.quizr.Model.Quiz" />
+        <action
+            android:id="@+id/NewQuestionAction"
+            app:destination="@id/newQuestionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newQuestionFragment"
+        android:name="com.myapp1.quizr.NewQuestionFragment"
+        android:label="New Question"
+        tools:layout="@layout/new_question_fragment" >
+        <argument
+            android:name="currentQuiz"
+            app:argType="com.myapp1.quizr.Model.Quiz" />
+        <action
+            android:id="@+id/action_newQuestionFragment_to_editQuizFragment"
+            app:destination="@id/editQuizFragment" />
+    </fragment>
+
 </navigation>

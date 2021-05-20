@@ -13,4 +13,22 @@
     <string name="login_str">Log in</string>
     <string name="register_str">Registration</string>
     <string name="main_page_str">Main Page</string>
+    <string name="quiz_title_str">Quiz Title</string>
+    <string name="submit_str">Submit</string>
+    <string name="quizzes_in_development_str">Quizzes in Development</string>
+    <string name="quiz_description_str">Quiz Description</string>
+    <string name="total_quizzes_str">Total Quizzes</string>
+    <string name="colon_punctualtion_str">:</string>
+    <string name="edit_str">Edit</string>
+    <string name="delete_str">Delete</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_quiz_str">Edit Quiz</string>
+    <string name="questions_str">Questions</string>
+    <string name="question_text_str">Question Text</string>
+    <string name="add_str">Add</string>
+    <string name="answers_str">Answers</string>
+    <string name="save_str">Save</string>
+    <string name="options_str">Options</string>
+    <string name="option_text_str">Option Text</string>
 </resources>
