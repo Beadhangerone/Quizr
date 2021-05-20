@@ -1,5 +1,6 @@
 package com.myapp1.quizr;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.navigation.Navigation;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -52,7 +54,11 @@ public class LogInFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_SIGN_IN) {
-            user.setValue(auth.getCurrentUser());
+            if (requestCode == Activity.RESULT_OK){
+                user.setValue(auth.getCurrentUser());
+            }else{
+                Navigation.findNavController(this.getView()).navigate(R.id.nav_home_page);
+            }
         }
     }
 
