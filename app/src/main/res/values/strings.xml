@@ -31,4 +31,5 @@
     <string name="save_str">Save</string>
     <string name="options_str">Options</string>
     <string name="option_text_str">Option Text</string>
+    <string name="log_out_str">Log Out</string>
 </resources>

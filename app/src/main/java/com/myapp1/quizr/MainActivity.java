@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home_page,
                 R.id.nav_login,
-                R.id.nav_register)
+                R.id.nav_log_out)
                 .setDrawerLayout(drawerLayout)
                 .build();
 

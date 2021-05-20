@@ -16,9 +16,9 @@
             android:title="@string/quizzes_in_development_str" />
 
         <item
-            android:id="@+id/nav_register"
-            android:icon="@drawable/register_ico"
-            android:title="@string/register_str" />
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/log_out_ico"
+            android:title="@string/log_out_str" />
     </group>
 
 <!--    <item android:title="Communicate">-->
