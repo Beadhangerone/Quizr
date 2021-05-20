@@ -5,7 +5,7 @@ The motivation behind the project is the fast digitalization of the learning pro
 
 Requirements:
 Must have:
-- [X] Creation of the quiz;
+- [x] Creation of the quiz;
 - [X] Edit of the quiz;
 - [X] Creation of the questions in a quiz;
 - [X] Edit of the questions in a quiz;
