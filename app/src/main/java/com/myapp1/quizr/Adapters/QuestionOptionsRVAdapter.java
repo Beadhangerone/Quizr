@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.myapp1.quizr.Model.QuestionOption;
 import com.myapp1.quizr.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionOptionsRVAdapter extends RecyclerView.Adapter<QuestionOptionsRVAdapter.QuestionOptionViewHolder> {
@@ -23,6 +24,9 @@ public class QuestionOptionsRVAdapter extends RecyclerView.Adapter<QuestionOptio
 
     public QuestionOptionsRVAdapter(List<QuestionOption> options, QuestionOptionClickListener questionOptionClickListener) {
         this.options = options;
+        if (options == null){
+            this.options = new ArrayList<>();
+        }
         this.questionOptionClickListener = questionOptionClickListener;
     }
 

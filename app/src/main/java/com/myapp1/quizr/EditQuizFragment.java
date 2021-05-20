@@ -74,7 +74,7 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
         addQuestionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections action = EditQuizFragmentDirections.NewQuestionAction(quiz);
+                NavDirections action = EditQuizFragmentDirections.OpenQuestionEditor(quiz, null);
                 Navigation.findNavController(view).navigate( action );
             }
         });
@@ -105,18 +105,16 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
 
     @Override
     public void onEditClick(View view, Question question) {
-
+        NavDirections action = EditQuizFragmentDirections.OpenQuestionEditor(quiz, question);
+        Navigation.findNavController(view).navigate( action );
     }
 
     @Override
     public void onDeleteClick(View view, Question question) {
-
         new AlertDialog.Builder(this.getContext())
                 .setTitle("Delete Question")
                 .setMessage("Do you really want to delete this question?")

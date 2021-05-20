@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.myapp1.quizr.Model.Question;
@@ -17,7 +18,7 @@ import java.util.List;
 public class QuestionVM extends AndroidViewModel {
 
     private QuestionRepo questionRepo;
-    private LiveData<List<QuestionOption>> options;
+    private MutableLiveData<List<QuestionOption>> options;
 
     public QuestionVM(@NonNull Application application) {
         super(application);
@@ -25,15 +26,8 @@ public class QuestionVM extends AndroidViewModel {
         questionRepo = QuestionRepo.getInstance(application);
     }
 
-    public LiveData<List<QuestionOption>> getOptionsForQuestion(Question question){
-        options = new LiveData<List<QuestionOption>>() {
-            @Override
-            public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super List<QuestionOption>> observer) {
-                questionRepo.getOptionsForQuestion(question).observe(owner, observer);
-            }
-        };
-
-        return options;
+    public List<QuestionOption> getOptionsForQuestion(Question question){
+        return questionRepo.getOptionsForQuestion(question);
     }
 
     public void insertOptionsForQuestion(Question question, List<QuestionOption> options) {

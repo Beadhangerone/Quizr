@@ -30,13 +30,15 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NewQuestionFragment#newInstance} factory method to
+ * Use the {@link QuestionEditorFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewQuestionFragment extends Fragment implements QuestionOptionsRVAdapter.QuestionOptionClickListener {
+public class QuestionEditorFragment extends Fragment implements QuestionOptionsRVAdapter.QuestionOptionClickListener {
     private static final String CURRENT_QUIZ = "currentQuiz";
+    private static final String QUESTION_TO_EDIT = "questionToEdit";
 
     private Quiz quiz;
+    private Question question_to_edit;
     private QuestionVM questionVM;
     private RecyclerView questionOptionsList;
     private QuestionOptionsRVAdapter questionOptionsRVAdapter;
@@ -48,7 +50,7 @@ public class NewQuestionFragment extends Fragment implements QuestionOptionsRVAd
     private MutableLiveData<List<QuestionOption>> questionOptions;
 
 
-    public NewQuestionFragment() {
+    public QuestionEditorFragment() {
         // Required empty public constructor
     }
 
@@ -59,10 +61,11 @@ public class NewQuestionFragment extends Fragment implements QuestionOptionsRVAd
      * @param quiz
      * @return A new instance of fragment newQuestionFragment.
      */
-    public static NewQuestionFragment newInstance(Quiz quiz) {
-        NewQuestionFragment fragment = new NewQuestionFragment();
+    public static QuestionEditorFragment newInstance(Quiz quiz, Question question) {
+        QuestionEditorFragment fragment = new QuestionEditorFragment();
         Bundle args = new Bundle();
         args.putSerializable(CURRENT_QUIZ, quiz);
+        args.putSerializable(QUESTION_TO_EDIT, question);
         fragment.setArguments(args);
         return fragment;
     }
@@ -72,34 +75,42 @@ public class NewQuestionFragment extends Fragment implements QuestionOptionsRVAd
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             this.quiz = (Quiz) getArguments().getSerializable(CURRENT_QUIZ);
+            this.question_to_edit = (Question) getArguments().getSerializable(QUESTION_TO_EDIT);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.new_question_fragment, container, false);
+        View view = inflater.inflate(R.layout.question_editor_fragment, container, false);
         questionVM = new ViewModelProvider(this).get(QuestionVM.class);
+
+        question_text_input = view.findViewById(R.id.question_text_input);
+        optionTextInput = view.findViewById(R.id.optionTextInput);
+        questionSaveBtn = view.findViewById(R.id.questionSaveBtn);
+        addOptionBtn = view.findViewById(R.id.addOptionBtn);
 
         questionOptionsList = view.findViewById(R.id.questionOptionsRV);
         questionOptionsList.hasFixedSize();
         questionOptionsList.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         questionOptions = new MutableLiveData<List<QuestionOption>>();
-
+        questionOptions.setValue(new ArrayList<QuestionOption>() {});
         questionOptions.observe(getViewLifecycleOwner(), new Observer<List<QuestionOption>>() {
             @Override
             public void onChanged(List<QuestionOption> questionOptions) {
-                questionOptionsRVAdapter = new QuestionOptionsRVAdapter(questionOptions, NewQuestionFragment.this);
+                questionOptionsRVAdapter = new QuestionOptionsRVAdapter(questionOptions, QuestionEditorFragment.this);
                 questionOptionsList.setAdapter(questionOptionsRVAdapter);
             }
         });
 
-        questionOptions.setValue(new ArrayList<QuestionOption>());
+        if(this.question_to_edit != null){
+            questionOptions.setValue(questionVM.getOptionsForQuestion(question_to_edit));
+            question_text_input.setText(question_to_edit.getQuestion_text());
+        }else{
+            this.question_to_edit = new Question();
+        }
 
-        optionTextInput = view.findViewById(R.id.optionTextInput);
-
-        addOptionBtn = view.findViewById(R.id.addOptionBtn);
         addOptionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,9 +127,6 @@ public class NewQuestionFragment extends Fragment implements QuestionOptionsRVAd
             }
         });
 
-        question_text_input = view.findViewById(R.id.question_text_input);
-
-        questionSaveBtn = view.findViewById(R.id.questionSaveBtn);
         questionSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,13 +141,12 @@ public class NewQuestionFragment extends Fragment implements QuestionOptionsRVAd
                     return;
                 }
 
-                Question question = new Question();
-                question.setQuestion_text(qText);
-                question.setQuiz_id(quiz.getId());
+                question_to_edit.setQuestion_text(qText);
+                question_to_edit.setQuiz_id(quiz.getId());
 
-                questionVM.insertOptionsForQuestion(question, questionOptions.getValue());
+                questionVM.insertOptionsForQuestion(question_to_edit, questionOptions.getValue());
 
-                NavDirections action = NewQuestionFragmentDirections.actionNewQuestionFragmentToEditQuizFragment(quiz);
+                NavDirections action = QuestionEditorFragmentDirections.actionNewQuestionFragmentToEditQuizFragment(quiz);
                 Navigation.findNavController(view).navigate( action );
 
             }

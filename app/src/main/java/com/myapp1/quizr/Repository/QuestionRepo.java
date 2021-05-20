@@ -49,13 +49,8 @@ public class QuestionRepo {
         return questionDAO.getQuestionsForQuiz(quiz.getId());
     }
 
-    public LiveData<List<QuestionOption>> getOptionsForQuestion(Question question) {
-        return new LiveData<List<QuestionOption>>() {
-            @Override
-            public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super List<QuestionOption>> observer) {
-                questionDAO.getOptionsForQuestion(question.getId());
-            }
-        };
+    public List<QuestionOption> getOptionsForQuestion(Question question) {
+        return questionDAO.getOptionsForQuestion(question.getId());
     }
 
     public int insertQuestion(Question question) {

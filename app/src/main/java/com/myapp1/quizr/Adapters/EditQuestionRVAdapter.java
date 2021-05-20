@@ -27,7 +27,7 @@ public class EditQuestionRVAdapter extends RecyclerView.Adapter<EditQuestionRVAd
     @Override
     public EditQuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.edit_question_fragment, parent, false);
+        View view = inflater.inflate(R.layout.quiz_editor_question_list_item_fragment, parent, false);
         return new EditQuestionViewHolder(view);
     }
 
@@ -75,7 +75,7 @@ public class EditQuestionRVAdapter extends RecyclerView.Adapter<EditQuestionRVAd
             edit_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println("Edit Question Click");
+                    questionClickListener.onEditClick(v, current_question);
                 }
             });
         }
