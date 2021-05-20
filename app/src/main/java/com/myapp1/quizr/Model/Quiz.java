@@ -3,6 +3,8 @@ package com.myapp1.quizr.Model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.Serializable;
 
 @Entity(tableName = "quizzes_in_dev")
@@ -11,10 +13,12 @@ public class Quiz implements Serializable {
     private int id;
     private String title;
     private String description;
+    private String uid;
 
     public Quiz(String title, String description) {
         this.title = title;
         this.description = description;
+        this.uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     public int getId() {
@@ -39,5 +43,13 @@ public class Quiz implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

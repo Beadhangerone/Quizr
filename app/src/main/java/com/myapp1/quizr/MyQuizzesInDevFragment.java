@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
@@ -15,6 +17,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.myapp1.quizr.Adapters.QuizRVAdapter;
 import com.myapp1.quizr.Model.Quiz;
 import com.myapp1.quizr.VM.QuizVM;
@@ -26,6 +29,17 @@ public class MyQuizzesInDevFragment extends Fragment implements QuizRVAdapter.On
     private RecyclerView myQuizzesInDevList;
     private QuizRVAdapter quizRVAdapter;
     private TextView quiz_count;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            Fragment fragment = new LogInFragment();
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
+        }
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //super.onCreate(savedInstanceState);

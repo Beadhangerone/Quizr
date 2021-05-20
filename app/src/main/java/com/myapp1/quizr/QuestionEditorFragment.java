@@ -19,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.myapp1.quizr.Adapters.QuestionOptionsRVAdapter;
 import com.myapp1.quizr.Model.Question;
 import com.myapp1.quizr.Model.QuestionOption;

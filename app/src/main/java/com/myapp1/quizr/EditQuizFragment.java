@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.myapp1.quizr.Adapters.EditQuestionRVAdapter;
 import com.myapp1.quizr.Model.Question;
 import com.myapp1.quizr.Model.Quiz;
@@ -44,6 +46,8 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
     private EditQuestionRVAdapter editQuestionRVAdapter;
     private TextView questionCount;
     private Button addQuestionBtn;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,6 +101,13 @@ public class EditQuizFragment extends Fragment implements EditQuestionRVAdapter.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            Fragment fragment = new LogInFragment();
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
+        }
+
         if (getArguments() != null) {
             quiz = (Quiz) getArguments().getSerializable(QUIZ_TO_EDIT);
         }

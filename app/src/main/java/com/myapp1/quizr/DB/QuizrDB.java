@@ -13,7 +13,7 @@ import com.myapp1.quizr.Model.Question;
 import com.myapp1.quizr.Model.QuestionOption;
 import com.myapp1.quizr.Model.Quiz;
 
-@Database(entities = {Quiz.class, Question.class, QuestionOption.class}, version = 3)
+@Database(entities = {Quiz.class, Question.class, QuestionOption.class}, version = 4)
 public abstract class QuizrDB extends RoomDatabase {
     private static QuizrDB instance;
 
